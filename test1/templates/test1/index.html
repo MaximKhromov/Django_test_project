@@ -1,0 +1,56 @@
+{% extends 'test1/base.html'%}
+
+{% block title %}
+  Main
+{% endblock %}
+
+{% block smth %}
+
+    <h1>Неотфильтрованные</h1>
+
+    {% if quest %}
+        <div>
+            {% for q in quest %}
+                <form method="post">
+{#                    {% csrf_token %}#}
+{#                    {{ form.answ }}<br>#}
+                    <div class="alert alert-info" role="alert"><h5>{{ q.question_text }}</h5></div>
+                    <p>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" name="{{ q.question_name }}" value="a1">{{ q.question_answ1 }}<Br>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" name="{{ q.question_name }}" value="a2">{{ q.question_answ2 }}<Br>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" name="{{ q.question_name }}" value="a3">{{ q.question_answ3 }}<Br>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" name="{{ q.question_name }}" value="a4">{{ q.question_answ4 }}
+                        </div>
+                    </p>
+                    <p><button type="submit" class="btn btn-success">Отправить</button></p>
+                </form>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>База данных пуста.</p>
+    {% endif %}
+
+    <h1>Отфильтрованные</h1>
+
+    {% if quest_f %}
+        <div>
+            {% for q_f in quest_f %}
+                <div class="alert alert-info" role="alert">
+                      <h3>{{ q_f.question_text }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>База данных пуста.</p>
+    {% endif %}
+{% endblock %}
